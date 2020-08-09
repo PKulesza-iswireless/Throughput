@@ -13,6 +13,7 @@ import sensor.service.parser.CeTrafficLogParser;
 import sensor.service.parser.FcrLogParser;
 import sensor.service.parser.GenomLogParser;
 import sensor.service.parser.LogParser;
+import sensor.service.parser.TestLogParser;
 import sensor.service.reader.FileMetricReader;
 import sensor.service.reader.GenomUrlMetricReader;
 import sensor.service.reader.MetricReader;
@@ -43,9 +44,10 @@ public class Manager {
                     return new FcrLogParser(metricProperties.getMetricName());
                 case GENOM:
                     return new GenomLogParser(metricProperties.getMetricName());
+                case TEST:
+                	return new TestLogParser(metricProperties.getMetricName());
                 case CE_TRAFFIC:
                     return new CeTrafficLogParser();
-                case TEST:
                 default:
                     throw new RuntimeException("There is no LogParser instance for " + applicationName);
             }
