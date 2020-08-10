@@ -123,6 +123,7 @@ public class Manager {
     private static FileChooser createFileChooser(ApplicationName applicationName) {
         return (FileChooser) suppliersContext.computeIfAbsent("FileChooser", s -> new SingletonSupplier<>(() -> {
             switch (applicationName) {
+            	case TEST:
                 case FCR:
                     return new FcrFileChooser(fileIndexProperties, metricProperties);
                 case CE_TRAFFIC:
