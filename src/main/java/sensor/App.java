@@ -32,7 +32,7 @@ public class App {
     	SaveToFile saveToFile = new SaveToFile();
         saveToFile.creatFile(filePath);
         Timer timer = new Timer();
-        timer.schedule(new SaveFileRunner(filePath), 0, 100);
+        timer.schedule(new SaveFileRunner(filePath), 0, 500);
     }
 }
 
