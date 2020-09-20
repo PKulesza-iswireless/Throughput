@@ -6,12 +6,14 @@ import sensor.common.enums.MetricSenderType;
 import sensor.common.enums.MetricSource;
 import sensor.service.chooser.CeTrafficFileChooser;
 import sensor.service.chooser.FileChooser;
+import sensor.service.chooser.ThroughputFileChooser;
 import sensor.service.chooser.FcrFileChooser;
 import sensor.service.converter.MetricConverter;
 import sensor.service.converter.PlaceholderMetricConverter;
 import sensor.service.parser.CeTrafficLogParser;
 import sensor.service.parser.FcrLogParser;
 import sensor.service.parser.GenomLogParser;
+import sensor.service.parser.ThroughputLogParser;
 import sensor.service.parser.LogParser;
 import sensor.service.parser.TestLogParser;
 import sensor.service.reader.FileMetricReader;
@@ -40,6 +42,8 @@ public class Manager {
 
         return (LogParser) suppliersContext.computeIfAbsent("LogParser", s -> new SingletonSupplier<>(() -> {
             switch (applicationName) {
+            	case THROUGHPUT:
+            		return new ThroughputLogParser(metricProperties.getMetricName());
                 case FCR:
                     return new FcrLogParser(metricProperties.getMetricName());
                 case GENOM:
@@ -123,6 +127,8 @@ public class Manager {
     private static FileChooser createFileChooser(ApplicationName applicationName) {
         return (FileChooser) suppliersContext.computeIfAbsent("FileChooser", s -> new SingletonSupplier<>(() -> {
             switch (applicationName) {
+            	case THROUGHPUT:
+            		return new ThroughputFileChooser(fileIndexProperties, metricProperties);
             	case TEST:
                 case FCR:
                     return new FcrFileChooser(fileIndexProperties, metricProperties);

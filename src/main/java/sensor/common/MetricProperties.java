@@ -237,6 +237,7 @@ public class MetricProperties {
                         if (EnumUtils.isValidEnum(ApplicationName.class, applicationName)) {
                             ApplicationName applicationNameEnum = EnumUtils.getEnum(ApplicationName.class, applicationName);
                             switch (applicationNameEnum) {
+                            	case THROUGHPUT:
                             	case TEST:
                                 case FCR:
                                 case GENOM:
